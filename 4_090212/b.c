@@ -5,11 +5,16 @@
 
 int main(int argc, char *argv[])
 {
+	if(argc != 2) {
+		perror("Usage: b FILENAME");
+		return 1;
+	}
 	struct stat buf;
 	mode_t new_mode;
 	char *ftype;
-	int perm;
+	int perm = 0;
 	stat(argv[1],&buf);
+
 	if(S_ISDIR(buf.st_mode))
 		ftype = "Directory";
 	else if (S_ISREG(buf.st_mode))
@@ -26,9 +31,27 @@ int main(int argc, char *argv[])
 		ftype = "Socket..";
 	else
 		ftype = "Unknown type file";
-	ifbuf.st_mode & I_IRUSR;
+
+	if(buf.st_mode & S_IRUSR)
+		perm += 400;
+	if(buf.st_mode & S_IWUSR)
+		perm += 200;
+	if(buf.st_mode & S_IXUSR)
+		perm += 100;
+	if(buf.st_mode & S_IRGRP)
+		perm += 40;
+	if(buf.st_mode & S_IWGRP)
+		perm += 20;
+	if(buf.st_mode & S_IXGRP)
+		perm += 10;
+	if(buf.st_mode & S_IROTH)
+		perm += 4;
+	if(buf.st_mode & S_IWOTH)
+		perm += 2;
+	if(buf.st_mode & S_IXOTH)
+		perm += 1;
 				
 	printf("This file's type is %s\n",ftype);
-	printf("File permission is %o\n",perm);
+	printf("File permission is %d\n",perm);
 	return 0;
 }
