@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 #define DEBUG 0
 
@@ -9,6 +10,9 @@ int main(void)
 	int i = 0;
 	pid0 = fork();
 	if(pid0 > 0) {
+		pid1 = fork();
+		if(pid1 == 0)
+
 		if(DEBUG) 
 			printf("Parent pid is %d.\n",getpid());
 		wait(NULL);
