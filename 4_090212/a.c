@@ -8,7 +8,7 @@ int main(void)
 	int access_mode, file_flags;
 	char *acc_flag,*nb_flag,*fd_flag,*ap_flag;
 	int fd;
-	fd = open("sample.c",O_RDONLY);
+	fd = open("sample.c",O_RDONLY | O_NONBLOCK);
 	file_flags = fcntl(fd, F_GETFL, 0);
 	access_mode = file_flags & O_ACCMODE;
 	if(access_mode == O_WRONLY)

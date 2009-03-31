@@ -32,8 +32,9 @@ int main(int argc, char *argv[])
 	else
 		ftype = "Unknown type file";
 
-	if(buf.st_mode & S_IRUSR)
-		perm += 400;
+	perm = buf.st_mode & S_IFMT;
+
+	/*
 	if(buf.st_mode & S_IWUSR)
 		perm += 200;
 	if(buf.st_mode & S_IXUSR)
@@ -50,7 +51,8 @@ int main(int argc, char *argv[])
 		perm += 2;
 	if(buf.st_mode & S_IXOTH)
 		perm += 1;
-				
+	*/
+
 	printf("This file's type is %s\n",ftype);
 	printf("File permission is %d\n",perm);
 	return 0;

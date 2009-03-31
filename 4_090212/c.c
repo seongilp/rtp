@@ -7,9 +7,9 @@ int main(void)
 	file = fopen("data.txt","rw");
 	while(1)
 	{
-		fread(&c,1,1,file)
+		fread(&c,1,1,file);
 	}
-	fflush();
+	fflush(stdout);
 	return 0;
 	// exit(0); // second 
 	// return 0; // without fflush
